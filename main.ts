@@ -1,3 +1,4 @@
+// 2 short, 4 long flashes per specification of mildew pd
 function sendAlert () {
     for (let index = 0; index < 2; index++) {
         pins.digitalWritePin(DigitalPin.P0, 1)
@@ -22,6 +23,7 @@ input.onButtonPressed(Button.B, function () {
 })
 let onoff = 0
 onoff = 0
+// runs only when set to ON
 basic.forever(function () {
     if (onoff == 1) {
         if (input.temperature() < 50 && input.soundLevel() > 80) {
