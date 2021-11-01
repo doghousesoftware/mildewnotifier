@@ -1,16 +1,10 @@
 // 2 short, 4 long flashes per specification of mildew pd
-function sendAlert () {
-    for (let index = 0; index < 2; index++) {
+function sendAlert (repeat: number, delay: number) {
+    for (let index = 0; index < repeat; index++) {
         pins.digitalWritePin(DigitalPin.P0, 1)
-        basic.pause(500)
+        basic.pause(delay)
         pins.digitalWritePin(DigitalPin.P0, 0)
-        basic.pause(500)
-    }
-    for (let index = 0; index < 4; index++) {
-        pins.digitalWritePin(DigitalPin.P0, 1)
-        basic.pause(1000)
-        pins.digitalWritePin(DigitalPin.P0, 0)
-        basic.pause(2000)
+        basic.pause(delay)
     }
 }
 input.onButtonPressed(Button.A, function () {
@@ -28,7 +22,9 @@ basic.forever(function () {
     if (onoff == 1) {
         if (input.lightLevel() < 50) {
             if (input.temperature() < 50 && input.temperature() > 10 && input.soundLevel() > 80) {
-                sendAlert()
+                sendAlert(2, 500)
+                basic.pause(2000)
+                sendAlert(4, 1000)
             }
         }
     }
