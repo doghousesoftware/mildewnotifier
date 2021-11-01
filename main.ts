@@ -17,9 +17,6 @@ input.onButtonPressed(Button.A, function () {
     onoff = 1
     basic.showString("ON")
 })
-input.onSound(DetectedSound.Loud, function () {
-	
-})
 input.onButtonPressed(Button.B, function () {
     onoff = 0
     basic.showString("OFF")
@@ -29,8 +26,10 @@ onoff = 0
 // runs only when set to ON
 basic.forever(function () {
     if (onoff == 1) {
-        if (input.temperature() < 50 && input.soundLevel() > 80) {
-            sendAlert()
+        if (input.lightLevel() < 50) {
+            if (input.temperature() < 50 && input.temperature() > 10 && input.soundLevel() > 80) {
+                sendAlert()
+            }
         }
     }
 })
